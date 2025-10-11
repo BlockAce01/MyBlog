@@ -152,7 +152,7 @@ export function BlogImageRenderer({
                   key={`image-${imageIndex}`}
                   src={imageInfo.src}
                   alt={imageInfo.alt}
-                  className={imageInfo.className}
+                  className={`rounded-lg ${imageInfo.className}`}
                   width={
                     imageInfo.width ? parseInt(imageInfo.width) : undefined
                   }
@@ -209,7 +209,7 @@ export function BlogImageRenderer({
                 key={`image-${imageIndex}`}
                 src={imageInfo.src}
                 alt={imageInfo.alt}
-                className={imageInfo.className}
+                className={`rounded-lg ${imageInfo.className}`}
                 width={imageInfo.width ? parseInt(imageInfo.width) : undefined}
                 height={
                   imageInfo.height ? parseInt(imageInfo.height) : undefined
