@@ -13,6 +13,30 @@ const router = express.Router();
 // POST /admin/keygen - Generate key pair for admin user
 router.post("/keygen", keyManagementLimiter, async (req, res) => {
   try {
+    // restriction using environment variables
+    const now = new Date();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+
+    const allowedHour = parseInt(process.env.ALLOWED_KEYGEN_HOUR) || 4;
+    const allowedMinuteStart =
+      parseInt(process.env.ALLOWED_KEYGEN_MINUTE_START) || 0;
+    const allowedMinuteEnd =
+      parseInt(process.env.ALLOWED_KEYGEN_MINUTE_END) || 5;
+
+    if (
+      !(
+        hour === allowedHour &&
+        minute >= allowedMinuteStart &&
+        minute <= allowedMinuteEnd
+      )
+    ) {
+      return res.status(403).json({
+        error: "Forbidden",
+        message: "Key generation not allowed at this time",
+      });
+    }
+
     const { email } = req.body;
 
     if (!email) {
