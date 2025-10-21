@@ -26,10 +26,10 @@ export function Header() {
               href="/"
               className="text-foreground hover:text-accent transition-colors font-medium"
             >
-              Home
+              Portfolio
             </Link>
             <Link
-              href="/about"
+              href="https://www.yugankavinda.me/"
               className="text-foreground hover:text-accent transition-colors font-medium"
             >
               About
