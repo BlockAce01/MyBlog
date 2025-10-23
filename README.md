@@ -135,4 +135,4 @@ The project utilizes Docker Compose for local orchestration and is designed for 
     ```bash
     docker-compose up --build
     ```
-    This will build and start the frontend, backend, and Nginx services.
+    This will build and start the frontend, backend, and Nginx services
