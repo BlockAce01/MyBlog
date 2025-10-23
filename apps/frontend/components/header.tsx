@@ -23,13 +23,13 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <Link
-              href="/"
+              href="https://www.yugankavinda.me/"
               className="text-foreground hover:text-accent transition-colors font-medium"
             >
               Portfolio
             </Link>
             <Link
-              href="https://www.yugankavinda.me/"
+              href="/about"
               className="text-foreground hover:text-accent transition-colors font-medium"
             >
               About
