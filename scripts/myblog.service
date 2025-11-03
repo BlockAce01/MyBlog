@@ -7,25 +7,33 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-WorkingDirectory=/home/ubuntu/myblog
+WorkingDirectory=/home/ubuntu/MyBlog
 User=ubuntu
 Group=ubuntu
 
-# Environment file
-EnvironmentFile=/home/ubuntu/myblog/.env
+# Environment file (optional, doesn't fail if missing)
+EnvironmentFile=-/home/ubuntu/MyBlog/.env
 
-# Pull latest images before starting (optional, comment out if not needed)
-ExecStartPre=/usr/bin/docker compose -f /home/ubuntu/myblog/docker-compose.prod.yml pull
+# Wait for Docker to be fully ready
+ExecStartPre=/bin/sleep 5
+ExecStartPre=/bin/bash -c 'until docker info > /dev/null 2>&1; do sleep 1; done'
+
+# Login to ECR before pulling (optional, comment out if not using ECR)
+ExecStartPre=-/bin/bash -c 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com'
+
+# Pull latest images (optional, ignore failures)
+ExecStartPre=-/usr/bin/docker compose -f /home/ubuntu/MyBlog/docker-compose.prod.yml pull
 
 # Start all services
-ExecStart=/usr/bin/docker compose -f /home/ubuntu/myblog/docker-compose.prod.yml up -d
+ExecStart=/usr/bin/docker compose -f /home/ubuntu/MyBlog/docker-compose.prod.yml up -d --remove-orphans
 
 # Stop all services
-ExecStop=/usr/bin/docker compose -f /home/ubuntu/myblog/docker-compose.prod.yml down
+ExecStop=/usr/bin/docker compose -f /home/ubuntu/MyBlog/docker-compose.prod.yml down
 
 # Restart policy
 Restart=on-failure
 RestartSec=10s
+TimeoutStartSec=300
 
 [Install]
 WantedBy=multi-user.target
