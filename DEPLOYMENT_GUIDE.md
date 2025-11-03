@@ -216,6 +216,20 @@ Monitor costs in AWS Billing console.
 - [ ] All API endpoints return 200 status
 - [ ] SSL certificate is valid
 - [ ] No secrets exposed in repository
+- [ ] Auto-restart on EC2 reboot configured (see EC2_SETUP_GUIDE.md)
+- [ ] Automatic storage cleanup configured (see EC2_SETUP_GUIDE.md)
+
+## 🚨 Important: Configure Auto-Restart & Storage Management
+
+After initial deployment, SSH into your EC2 instance and run:
+
+```bash
+cd /home/ubuntu/myblog
+sudo bash scripts/setup-systemd.sh       # Auto-restart on reboot
+sudo bash scripts/setup-auto-cleanup.sh  # Automatic storage cleanup
+```
+
+See [QUICK_FIX.md](./QUICK_FIX.md) or [EC2_SETUP_GUIDE.md](./EC2_SETUP_GUIDE.md) for details.
 
 ## 🆘 Getting Help
 

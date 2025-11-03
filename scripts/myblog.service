@@ -1,0 +1,31 @@
+[Unit]
+Description=MyBlog Docker Application
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/home/ubuntu/myblog
+User=ubuntu
+Group=ubuntu
+
+# Environment file
+EnvironmentFile=/home/ubuntu/myblog/.env
+
+# Pull latest images before starting (optional, comment out if not needed)
+ExecStartPre=/usr/bin/docker compose -f /home/ubuntu/myblog/docker-compose.prod.yml pull
+
+# Start all services
+ExecStart=/usr/bin/docker compose -f /home/ubuntu/myblog/docker-compose.prod.yml up -d
+
+# Stop all services
+ExecStop=/usr/bin/docker compose -f /home/ubuntu/myblog/docker-compose.prod.yml down
+
+# Restart policy
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
