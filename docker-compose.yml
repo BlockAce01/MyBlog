@@ -1,21 +1,4 @@
 services:
-  # MongoDB Database (using MongoDB Atlas for cloud, but can be replaced with local MongoDB if needed)
-  # Note: This service is commented out since the app uses MongoDB Atlas
-  # Uncomment and configure if you want to use local MongoDB instead
-  # mongodb:
-  #   image: mongo:7.0
-  #   container_name: myblog-mongodb
-  #   restart: unless-stopped
-  #   environment:
-  #     MONGO_INITDB_ROOT_USERNAME: admin
-  #     MONGO_INITDB_ROOT_PASSWORD: password
-  #   ports:
-  #     - "27017:27017"
-  #   volumes:
-  #     - mongodb_data:/data/db
-  #   networks:
-  #     - myblog-network
-
   # Backend API Service
   backend:
     build:
@@ -34,7 +17,7 @@ services:
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
     depends_on:
-      # - mongodb  # Uncomment if using local MongoDB
+      # - mongodb
       - redis
     networks:
       - myblog-network
