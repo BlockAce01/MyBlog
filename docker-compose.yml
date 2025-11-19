@@ -35,7 +35,7 @@ services:
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
     depends_on:
-      # - mongodb  # Uncomment if using local MongoDB
+      # - mongodb
       - redis
     networks:
       - myblog-network
@@ -74,7 +74,7 @@ services:
     networks:
       - myblog-network
 
-  # Redis for caching (optional but recommended for production)
+  # Redis for caching
   redis:
     image: redis:7.2-alpine
     container_name: myblog-redis

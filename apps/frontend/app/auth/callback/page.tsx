@@ -8,8 +8,8 @@ function AuthCallbackContent() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const token = searchParams.get("token");
-    const callbackUrl = searchParams.get("callbackUrl"); // Retrieve callbackUrl
+    const token = searchParams?.get("token");
+    const callbackUrl = searchParams?.get("callbackUrl"); // Retrieve callbackUrl
 
     if (token) {
       // Store the JWT token from backend

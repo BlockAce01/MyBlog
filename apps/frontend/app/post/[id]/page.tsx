@@ -18,7 +18,7 @@ import { useParams } from "next/navigation";
 
 export default function PostPage() {
   const params = useParams();
-  const id = params.id as string;
+  const id = params?.id as string;
   const hasViewed = useRef(false);
 
   const [post, setPost] = useState<BlogPost | null>(null);

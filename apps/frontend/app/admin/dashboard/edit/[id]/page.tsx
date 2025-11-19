@@ -31,8 +31,8 @@ import RichTextEditor from "@/components/RichTextEditor";
 
 export default function EditBlogPostPage() {
   const { isAuthenticated, isLoading: authLoading } = useAuth();
-  const router = useParams();
-  const postId = router.id as string;
+  const params = useParams();
+  const postId = params?.id as string;
   const navigate = useRouter();
 
   const [formData, setFormData] = useState({
